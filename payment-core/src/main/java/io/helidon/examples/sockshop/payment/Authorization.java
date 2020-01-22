@@ -3,6 +3,7 @@ package io.helidon.examples.sockshop.payment;
 import java.io.Serializable;
 
 public class Authorization implements Serializable {
+    private String orderId;
     private boolean authorised = false;
     private String message;
     private Object error;
@@ -11,7 +12,8 @@ public class Authorization implements Serializable {
     public Authorization() {
     }
 
-    public Authorization(boolean authorised, String message, Object error) {
+    public Authorization(String orderId, boolean authorised, String message, Object error) {
+        this.orderId = orderId;
         this.authorised = authorised;
         this.message = message;
         this.error = error;
@@ -25,6 +27,14 @@ public class Authorization implements Serializable {
                 '}';
     }
 
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
     public boolean isAuthorised() {
         return authorised;
     }
@@ -33,12 +43,12 @@ public class Authorization implements Serializable {
         this.authorised = authorised;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     public String getMessage() {
         return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public Object getError() {return error;}

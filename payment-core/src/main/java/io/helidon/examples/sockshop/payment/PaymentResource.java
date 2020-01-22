@@ -28,13 +28,14 @@ public class PaymentResource {
         String lastName  = paymentRequest.getCustomer().getLastName();
 
         Authorization auth = paymentService.authorize(
+                paymentRequest.getOrderId(),
                 firstName,
                 lastName,
                 paymentRequest.getCard(),
                 paymentRequest.getAddress(),
                 paymentRequest.getAmount());
 
-        payments.addAuthorization(paymentRequest.getOrderId(), auth);
+        payments.addAuthorization(auth);
 
         return auth;
     }

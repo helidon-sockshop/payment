@@ -14,7 +14,7 @@ public class DefaultPaymentRepository implements PaymentRepository {
     private Map<String, Authorization> payments = new ConcurrentHashMap<>();
 
     @Override
-    public void addAuthorization(String orderId, Authorization auth) {
-        payments.put(orderId, auth);
+    public void addAuthorization(Authorization auth) {
+        payments.put(auth.getOrderId(), auth);
     }
 }
