@@ -1,10 +1,8 @@
 package io.helidon.examples.sockshop.payment;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Alternative;
 
 @ApplicationScoped
-@Alternative
 public class DefaultPaymentService implements PaymentService {
 
     private final static float PaymentLimit = 105f;
