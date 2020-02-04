@@ -13,6 +13,7 @@ import io.helidon.examples.sockshop.payment.DefaultPaymentRepository;
 
 import com.mongodb.client.MongoCollection;
 import org.bson.BsonDocument;
+import org.eclipse.microprofile.opentracing.Traced;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -22,6 +23,7 @@ import static com.mongodb.client.model.Filters.eq;
  */
 @ApplicationScoped
 @Specializes
+@Traced
 public class MongoPaymentRepository extends DefaultPaymentRepository {
     /**
      * Mongo collection used to store payment authorizations.

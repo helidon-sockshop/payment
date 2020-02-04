@@ -12,12 +12,15 @@ import javax.transaction.Transactional;
 import io.helidon.examples.sockshop.payment.Authorization;
 import io.helidon.examples.sockshop.payment.DefaultPaymentRepository;
 
+import org.eclipse.microprofile.opentracing.Traced;
+
 /**
  * An implementation of {@link io.helidon.examples.sockshop.payment.PaymentRepository}
  * that that uses relational database (via JPA) as a backend data store.
  */
 @ApplicationScoped
 @Specializes
+@Traced
 public class JpaPaymentRepository extends DefaultPaymentRepository {
 
     @PersistenceContext

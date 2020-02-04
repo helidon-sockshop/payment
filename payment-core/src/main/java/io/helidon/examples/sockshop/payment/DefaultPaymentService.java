@@ -6,6 +6,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.eclipse.microprofile.opentracing.Traced;
 
 /**
  * Trivial {@link PaymentService} implementation for demo and testing purposes.
@@ -15,6 +16,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
  * and declines all requests above that amount.
  */
 @ApplicationScoped
+@Traced
 public class DefaultPaymentService implements PaymentService {
     /**
      * Payment limit

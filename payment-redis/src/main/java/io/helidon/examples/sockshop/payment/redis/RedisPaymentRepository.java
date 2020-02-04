@@ -8,6 +8,7 @@ import io.helidon.examples.sockshop.payment.AuthorizationId;
 import io.helidon.examples.sockshop.payment.DefaultPaymentRepository;
 import io.helidon.examples.sockshop.payment.Authorization;
 
+import org.eclipse.microprofile.opentracing.Traced;
 import org.redisson.api.RMap;
 
 /**
@@ -16,6 +17,7 @@ import org.redisson.api.RMap;
  */
 @ApplicationScoped
 @Specializes
+@Traced
 public class RedisPaymentRepository extends DefaultPaymentRepository {
     @Inject
     public RedisPaymentRepository(RMap<AuthorizationId, Authorization> payments) {

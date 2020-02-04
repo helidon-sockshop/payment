@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
 
+import org.eclipse.microprofile.opentracing.Traced;
+
 /**
  * Simple in-memory implementation of {@link io.helidon.examples.sockshop.payment.PaymentRepository}
  * that can be used for demos and testing.
@@ -17,6 +19,7 @@ import javax.enterprise.context.ApplicationScoped;
  * API testing and quick demos.
  */
 @ApplicationScoped
+@Traced
 public class DefaultPaymentRepository implements PaymentRepository {
     private Map<AuthorizationId, Authorization> payments;
 
