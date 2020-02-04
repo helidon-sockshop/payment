@@ -1,7 +1,6 @@
 package io.helidon.examples.sockshop.payment.mongo;
 
 import java.util.Collections;
-import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
@@ -15,15 +14,12 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.connection.ClusterDescription;
-import com.mongodb.connection.ServerDescription;
+
 import lombok.extern.java.Log;
+
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.Conventions;
 import org.bson.codecs.pojo.PojoCodecProvider;
-import org.eclipse.microprofile.health.Health;
-import org.eclipse.microprofile.health.HealthCheck;
-import org.eclipse.microprofile.health.HealthCheckResponse;
 
 import static java.lang.String.format;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
@@ -39,7 +35,7 @@ public class MongoProducers {
     /**
      * Default MongoDB host to connect to.
      */
-    public static final String DEFAULT_HOST = "payments-db";
+    public static final String DEFAULT_HOST = "payment-db";
 
     /**
      * Default MongoDB port to connect to.

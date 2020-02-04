@@ -7,6 +7,7 @@ import io.helidon.microprofile.server.Server;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.jboss.weld.proxy.WeldClientProxy;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,6 +29,11 @@ public class PaymentResourceIT {
      */
     private static final Server SERVER = Server.builder().port(0).build().start();
     private PaymentRepository payments;
+
+    @AfterAll
+    static void stopServer() {
+        SERVER.stop();
+    }
 
     @BeforeEach
     void setup() throws Exception {

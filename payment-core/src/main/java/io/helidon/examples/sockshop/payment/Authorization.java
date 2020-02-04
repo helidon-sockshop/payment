@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -47,6 +48,7 @@ public class Authorization implements Serializable {
     /**
      * Processing error, if any.
      */
+    @Embedded
     private Err error;
 
     @Builder

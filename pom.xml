@@ -12,6 +12,8 @@
     <modules>
         <module>payment-core</module>
         <module>payment-mongo</module>
+        <module>payment-mysql</module>
+        <module>payment-redis</module>
     </modules>
 
 </project>
