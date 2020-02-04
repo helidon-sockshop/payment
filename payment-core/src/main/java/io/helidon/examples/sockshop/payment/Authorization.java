@@ -1,55 +1,66 @@
 package io.helidon.examples.sockshop.payment;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
+import javax.json.bind.annotation.JsonbTransient;
+import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.bson.codecs.pojo.annotations.BsonIgnore;
+
+/**
+ * Payment authorization to send back to the Order service.
+ */
+@Data
+@NoArgsConstructor
+@Entity
+@IdClass(AuthorizationId.class)
 public class Authorization implements Serializable {
+    /**
+     * Order identifier.
+     */
+    @Id
     private String orderId;
-    private boolean authorised = false;
-    private String message;
-    private Object error;
 
-    // For jackson
-    public Authorization() {
-    }
+    /**
+     * Time when this payment authorization was created.
+     */
+    @Id
+    private LocalDateTime time;
 
-    public Authorization(String orderId, boolean authorised, String message, Object error) {
+    /**
+     * Flag specifying whether the payment was authorized.
+     */
+    private boolean authorised;
+
+    /**
+     * Approval or rejection message.
+     */
+    private String  message;
+
+    /**
+     * Processing error, if any.
+     */
+    private Err error;
+
+    @Builder
+    Authorization(String orderId, LocalDateTime time, boolean authorised, String message, Err error) {
         this.orderId = orderId;
+        this.time = time;
         this.authorised = authorised;
         this.message = message;
         this.error = error;
     }
 
-    @Override
-    public String toString() {
-        return "Authorization{" +
-                "authorised=" + authorised +
-                ", message=" + message +
-                '}';
+    @JsonbTransient
+    @BsonIgnore
+    public AuthorizationId getId() {
+        return new AuthorizationId(orderId, time);
     }
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    public boolean isAuthorised() {
-        return authorised;
-    }
-
-    public void setAuthorised(boolean authorised) {
-        this.authorised = authorised;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public Object getError() {return error;}
 }

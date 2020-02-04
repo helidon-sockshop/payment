@@ -1,72 +1,46 @@
 package io.helidon.examples.sockshop.payment;
 
-import java.util.UUID;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+/**
+ * Payment request that is received from Orders service for authorization.
+ */
+@Data
+@NoArgsConstructor
 public class PaymentRequest {
+    /**
+     * Order identifier.
+     */
     private String orderId;
-    private Address address;
-    private Card card;
+
+    /**
+     * Customer information.
+     */
     private Customer customer;
+
+    /**
+     * Billing address.
+     */
+    private Address address;
+
+    /**
+     * Payment card details.
+     */
+    private Card card;
+
+    /**
+     * Payment amount.
+     */
     private float amount;
 
-    // For jackson
-    public PaymentRequest() {
-    }
-
-    public PaymentRequest(String orderId, Address address, Card card, Customer customer, float amount) {
+    @Builder
+    PaymentRequest(String orderId, Customer customer, Address address, Card card, float amount) {
         this.orderId = orderId;
-        this.address = address;
         this.customer = customer;
-        this.card = card;
-        this.amount = amount;
-    }
-
-    @Override
-    public String toString() {
-        return "PaymentRequest{" +
-                "orderId=" + orderId +
-                ", address=" + address +
-                ", card=" + card +
-                ", customer=" + customer +
-                '}';
-    }
-
-    public String getOrderId() {
-        if (orderId == null) {
-            orderId = UUID.randomUUID().toString();
-        }
-        return orderId;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
         this.address = address;
-    }
-
-    public Card getCard() {
-        return card;
-    }
-
-    public void setCard(Card card) {
         this.card = card;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public float getAmount() {
-        return amount;
-    }
-
-    public void setAmount(float amount) {
         this.amount = amount;
     }
 }
