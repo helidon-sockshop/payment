@@ -1,18 +1,18 @@
-# Shopping Cart Service
+# Payment Service
 
-The Shopping Cart Service is implemented as a multi-module project containing the following modules:
+The Payment Service is implemented as a multi-module project containing the following modules:
 
-1. **[carts-core](./carts-core)** contains the bulk of the service implementation, including
+1. **[payment-core](./payment-core)** contains the bulk of the service implementation, including
 domain model, the REST service itself, as well as the data repository abstraction and its 
 in-memory implementation;
 
-2. **[carts-mongo](./carts-mongo)** contains the data repository implementation for MongoDB 
+2. **[payment-mongo](./payment-mongo)** contains the data repository implementation for MongoDB 
 backend
 
-3. **[carts-mysql](./carts-mysql)** contains the data repository implementation for MySQL 
+3. **[payment-mysql](./payment-mysql)** contains the data repository implementation for MySQL 
 backend (using JPA)
 
-4. **[carts-redis](./carts-redis)** contains the data repository implementation for Redis 
+4. **[payment-redis](./payment-redis)** contains the data repository implementation for Redis 
 backend (using Redisson client)
 
 ## API
@@ -24,7 +24,7 @@ TBD (add OpenAPI support/link)
 ## Building the service
 
 In order to build all the modules and create Docker images for the service, simply run the 
-following commands inside the top-level `carts` directory:
+following commands inside the top-level `payment` directory:
 
 ```bash
 $ mvn clean install
