@@ -1,6 +1,7 @@
 package io.helidon.examples.sockshop.payment;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 import io.helidon.microprofile.server.Server;
 
@@ -97,7 +98,7 @@ public class PaymentResourceIT {
 
     @Test
     void testFindPaymentsByOrder() {
-        LocalDateTime time = LocalDateTime.now();
+        LocalDateTime time = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
         payments.saveAuthorization(auth("A123", time, new Err("Payment service unavailable")));
         payments.saveAuthorization(auth("A123", time.plusSeconds(5), false, "Payment declined"));
         payments.saveAuthorization(auth("A123", time.plusSeconds(10), true, "Payment processed"));

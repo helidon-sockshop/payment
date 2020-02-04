@@ -21,14 +21,14 @@ public class DefaultPaymentRepository implements PaymentRepository {
     private Map<AuthorizationId, Authorization> payments;
 
     /**
-     * Construct {@code DefaultOrderRepository} with an empty storage map.
+     * Construct {@code DefaultPaymentRepository} with an empty storage map.
      */
     public DefaultPaymentRepository() {
         this(new ConcurrentHashMap<>());
     }
 
     /**
-     * Construct {@code DefaultOrderRepository} with the specified storage map.
+     * Construct {@code DefaultPaymentRepository} with the specified storage map.
      *
      * @param payments the storage map to use
      */

@@ -10,7 +10,7 @@ public class DefaultPaymentRepositoryTest extends PaymentRepositoryTest {
     }
 
     @Override
-    protected void clearRepository(PaymentRepository orders) {
-        ((DefaultPaymentRepository) orders).clear();
+    protected void clearRepository(PaymentRepository repository) {
+        ((DefaultPaymentRepository) repository).clear();
     }
 }

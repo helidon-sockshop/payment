@@ -1,7 +1,5 @@
 package io.helidon.examples.sockshop.payment;
 
-import java.util.Collection;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;

@@ -25,8 +25,8 @@ public class JpaPaymentRepository extends DefaultPaymentRepository {
 
     @Override
     @Transactional
-    public void saveAuthorization(Authorization order) {
-        em.persist(order);
+    public void saveAuthorization(Authorization authorization) {
+        em.persist(authorization);
     }
 
     @Override

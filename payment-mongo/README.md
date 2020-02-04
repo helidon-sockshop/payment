@@ -1,7 +1,7 @@
 # payment-mongo
 
 This module implements [MongoDB backend](./src/main/java/io/helidon/examples/sockshop/payment/mongo/MongoPaymentRepository.java)
-for the [Shopping Payment Service](../README.md).
+for the [Payment Service](../README.md).
 
 ## Building the Service
 

@@ -1,6 +1,7 @@
 package io.helidon.examples.sockshop.payment;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -30,7 +31,7 @@ public abstract class PaymentRepositoryTest {
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
     void testSaveAuthorization() {
-        LocalDateTime time = LocalDateTime.now();
+        LocalDateTime time = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
         payments.saveAuthorization(auth("A123", time,true, "Payment processed"));
 
         Collection<? extends Authorization> auths = payments.findAuthorizationsByOrder("A123");
@@ -47,7 +48,7 @@ public abstract class PaymentRepositoryTest {
 
     @Test
     void testFindAuthorizationsByOrder() {
-        LocalDateTime time = LocalDateTime.now();
+        LocalDateTime time = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
         payments.saveAuthorization(auth("A123", time, new Err("Payment service unavailable")));
         payments.saveAuthorization(auth("A123", time.plusSeconds(5), false, "Payment declined"));
         payments.saveAuthorization(auth("A123", time.plusSeconds(10), true, "Payment processed"));
