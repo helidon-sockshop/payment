@@ -6,9 +6,12 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
+import javax.annotation.Priority;
 import javax.enterprise.context.ApplicationScoped;
 
 import org.eclipse.microprofile.opentracing.Traced;
+
+import static javax.interceptor.Interceptor.Priority.APPLICATION;
 
 /**
  * Simple in-memory implementation of {@link io.helidon.examples.sockshop.payment.PaymentRepository}
@@ -19,9 +22,10 @@ import org.eclipse.microprofile.opentracing.Traced;
  * API testing and quick demos.
  */
 @ApplicationScoped
+@Priority(APPLICATION - 10)
 @Traced
 public class DefaultPaymentRepository implements PaymentRepository {
-    private Map<AuthorizationId, Authorization> payments;
+    protected Map<AuthorizationId, Authorization> payments;
 
     /**
      * Construct {@code DefaultPaymentRepository} with an empty storage map.
@@ -50,14 +54,5 @@ public class DefaultPaymentRepository implements PaymentRepository {
                 .filter(authorization -> authorization.getOrderId().equals(orderId))
                 .sorted(Comparator.comparing(Authorization::getTime))
                 .collect(Collectors.toList());
-    }
-
-    // ---- helpers ---------------------------------------------------------
-
-    /**
-     * Helper to clear this repository for testing.
-     */
-    public void clear() {
-        payments.clear();
     }
 }

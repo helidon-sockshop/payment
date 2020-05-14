@@ -1,7 +1,7 @@
 package io.helidon.examples.sockshop.payment.jpa;
 
-import io.helidon.examples.sockshop.payment.PaymentRepository;
 import io.helidon.examples.sockshop.payment.PaymentRepositoryTest;
+import io.helidon.examples.sockshop.payment.TestPaymentRepository;
 import io.helidon.microprofile.server.Server;
 
 import org.junit.jupiter.api.AfterAll;
@@ -33,12 +33,7 @@ public class JpaPaymentRepositoryIT extends PaymentRepositoryTest {
     }
 
     @Override
-    protected PaymentRepository getPaymentRepository() {
-        return SERVER.cdiContainer().select(PaymentRepository.class).get();
-    }
-
-    @Override
-    protected void clearRepository(PaymentRepository payment) {
-        ((JpaPaymentRepository) payment).clear();
+    protected TestPaymentRepository getPaymentRepository() {
+        return SERVER.cdiContainer().select(TestPaymentRepository.class).get();
     }
 }

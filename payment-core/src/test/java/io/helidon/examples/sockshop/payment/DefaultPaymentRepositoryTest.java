@@ -5,12 +5,7 @@ package io.helidon.examples.sockshop.payment;
  */
 public class DefaultPaymentRepositoryTest extends PaymentRepositoryTest {
     @Override
-    protected PaymentRepository getPaymentRepository() {
-        return new DefaultPaymentRepository();
-    }
-
-    @Override
-    protected void clearRepository(PaymentRepository repository) {
-        ((DefaultPaymentRepository) repository).clear();
+    protected TestPaymentRepository getPaymentRepository() {
+        return new TestDefaultPaymentRepository();
     }
 }

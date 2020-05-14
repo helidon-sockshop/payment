@@ -46,7 +46,7 @@ public class PaymentResourceIT {
         SERVER.stop();
     }
 
-    private PaymentRepository payments;
+    private TestPaymentRepository payments;
 
     @BeforeEach
     void setup() throws Exception {
@@ -54,13 +54,8 @@ public class PaymentResourceIT {
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = SERVER.port();
 
-        payments = SERVER.cdiContainer().select(PaymentRepository.class).get();
-
-        // oh, boy... not pretty, but probably the best we can do
-        // without adding clear() to public interface
-        WeldClientProxy proxy = (WeldClientProxy) payments;
-        Object o = proxy.getMetadata().getContextualInstance();
-        o.getClass().getMethod("clear").invoke(o);
+        payments = SERVER.cdiContainer().select(TestPaymentRepository.class).get();
+        payments.clear();
     }
 
     @Test

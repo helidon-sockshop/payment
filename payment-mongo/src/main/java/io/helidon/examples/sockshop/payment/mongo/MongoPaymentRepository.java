@@ -4,31 +4,34 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Consumer;
 
+import javax.annotation.Priority;
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Specializes;
+import javax.enterprise.inject.Alternative;
 import javax.inject.Inject;
 
 import io.helidon.examples.sockshop.payment.Authorization;
-import io.helidon.examples.sockshop.payment.DefaultPaymentRepository;
+import io.helidon.examples.sockshop.payment.PaymentRepository;
 
 import com.mongodb.client.MongoCollection;
-import org.bson.BsonDocument;
+
 import org.eclipse.microprofile.opentracing.Traced;
 
 import static com.mongodb.client.model.Filters.eq;
+import static javax.interceptor.Interceptor.Priority.APPLICATION;
 
 /**
  * An implementation of {@link io.helidon.examples.sockshop.payment.PaymentRepository}
  * that that uses MongoDB as a backend data store.
  */
 @ApplicationScoped
-@Specializes
+@Alternative
+@Priority(APPLICATION)
 @Traced
-public class MongoPaymentRepository extends DefaultPaymentRepository {
+public class MongoPaymentRepository implements PaymentRepository {
     /**
      * Mongo collection used to store payment authorizations.
      */
-    private MongoCollection<Authorization> payments;
+    protected MongoCollection<Authorization> payments;
 
     /**
      * Construct {@code MongoPaymentRepository} instance.
@@ -54,12 +57,4 @@ public class MongoPaymentRepository extends DefaultPaymentRepository {
 
         return results;
     }
-
-    // ---- helpers ---------------------------------------------------------
-
-    @Override
-    public void clear() {
-        payments.deleteMany(new BsonDocument());
-    }
-
 }

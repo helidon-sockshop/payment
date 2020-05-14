@@ -18,14 +18,13 @@ import static org.hamcrest.Matchers.nullValue;
  */
 public abstract class PaymentRepositoryTest {
 
-    private PaymentRepository payments = getPaymentRepository();
+    private final TestPaymentRepository payments = getPaymentRepository();
 
-    protected abstract PaymentRepository getPaymentRepository();
-    protected abstract void clearRepository(PaymentRepository payments);
+    protected abstract TestPaymentRepository getPaymentRepository();
 
     @BeforeEach
     void setup() {
-        clearRepository(payments);
+        payments.clear();
     }
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")

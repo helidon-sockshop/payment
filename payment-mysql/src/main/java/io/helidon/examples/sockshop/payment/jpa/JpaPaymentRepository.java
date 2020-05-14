@@ -2,29 +2,33 @@ package io.helidon.examples.sockshop.payment.jpa;
 
 import java.util.Collection;
 
+import javax.annotation.Priority;
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Specializes;
+import javax.enterprise.inject.Alternative;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import io.helidon.examples.sockshop.payment.Authorization;
-import io.helidon.examples.sockshop.payment.DefaultPaymentRepository;
+import io.helidon.examples.sockshop.payment.PaymentRepository;
 
 import org.eclipse.microprofile.opentracing.Traced;
+
+import static javax.interceptor.Interceptor.Priority.APPLICATION;
 
 /**
  * An implementation of {@link io.helidon.examples.sockshop.payment.PaymentRepository}
  * that that uses relational database (via JPA) as a backend data store.
  */
 @ApplicationScoped
-@Specializes
+@Alternative
+@Priority(APPLICATION)
 @Traced
-public class JpaPaymentRepository extends DefaultPaymentRepository {
+public class JpaPaymentRepository implements PaymentRepository {
 
     @PersistenceContext
-    private EntityManager em;
+    protected EntityManager em;
 
     @Override
     @Transactional
@@ -40,11 +44,5 @@ public class JpaPaymentRepository extends DefaultPaymentRepository {
         query.setParameter("orderId", orderId);
 
         return query.getResultList();
-    }
-
-    @Override
-    @Transactional
-    public void clear() {
-        em.createQuery("delete from Authorization").executeUpdate();
     }
 }
