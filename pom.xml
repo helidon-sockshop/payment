@@ -11,6 +11,7 @@
 
     <modules>
         <module>payment-core</module>
+        <module>payment-coherence</module>
         <module>payment-mongo</module>
         <module>payment-mysql</module>
         <module>payment-redis</module>
