@@ -8,6 +8,7 @@ import javax.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 /**
  * Represents an unexpected error.
@@ -16,10 +17,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
+@Schema(description = "Represents an unexpected error")
 public class Err implements Serializable {
     /**
      * Error description.
      */
+    @Schema(description = "Error description")
     @Column(name = "error")
     private String message;
 }

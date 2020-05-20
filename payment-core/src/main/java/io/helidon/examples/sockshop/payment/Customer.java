@@ -5,21 +5,25 @@ import java.io.Serializable;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 /**
  * Customer information.
  */
 @Data
 @NoArgsConstructor
+@Schema(description = "Customer information")
 public class Customer implements Serializable {
     /**
      * First name.
      */
+    @Schema(description = "First name")
     private String firstName;
 
     /**
      * Last name.
      */
+    @Schema(description = "Last name")
     private String lastName;
 
     @Builder

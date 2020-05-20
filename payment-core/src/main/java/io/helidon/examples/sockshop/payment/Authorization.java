@@ -14,6 +14,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.bson.codecs.pojo.annotations.BsonIgnore;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 /**
  * Payment authorization to send back to the Order service.
@@ -22,33 +23,39 @@ import org.bson.codecs.pojo.annotations.BsonIgnore;
 @NoArgsConstructor
 @Entity
 @IdClass(AuthorizationId.class)
+@Schema(description = "Payment authorization to send back to the Order service")
 public class Authorization implements Serializable {
     /**
      * Order identifier.
      */
     @Id
+    @Schema(description = "Order identifier")
     private String orderId;
 
     /**
      * Time when this payment authorization was created.
      */
     @Id
+    @Schema(description = "Time when this payment authorization was created")
     private LocalDateTime time;
 
     /**
      * Flag specifying whether the payment was authorized.
      */
+    @Schema(description = "Flag specifying whether the payment was authorized")
     private boolean authorised;
 
     /**
      * Approval or rejection message.
      */
+    @Schema(description = "Approval or rejection message")
     private String  message;
 
     /**
      * Processing error, if any.
      */
     @Embedded
+    @Schema(description = "Processing error, if any")
     private Err error;
 
     @Builder

@@ -5,36 +5,43 @@ import java.io.Serializable;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 /**
  * Shipping or billing address.
  */
 @Data
 @NoArgsConstructor
+@Schema(description = "Shipping or billing address")
 public class Address implements Serializable {
     /**
      * Street number.
      */
+    @Schema(description = "Street number")
     private String number;
 
     /**
      * Street name.
      */
+    @Schema(description = "Street name")
     private String street;
 
     /**
      * City name.
      */
+    @Schema(description = "City name")
     private String city;
 
     /**
      * Postal code.
      */
+    @Schema(description = "Postal code")
     private String postcode;
 
     /**
      * Country name.
      */
+    @Schema(description = "Country name")
     private String country;
 
     @Builder

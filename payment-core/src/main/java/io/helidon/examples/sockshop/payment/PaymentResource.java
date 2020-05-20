@@ -17,7 +17,7 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
  */
 @ApplicationScoped
 @Path("/payments")
-public class PaymentResource {
+public class PaymentResource implements PaymentApi {
     /**
      * Payment repository to use.
      */
@@ -30,16 +30,12 @@ public class PaymentResource {
     @Inject
     private PaymentService paymentService;
 
-    @GET
-    @Path("{orderId}")
-    @Produces(APPLICATION_JSON)
-    public Response getOrderAuthorizations(@PathParam("orderId") String orderId) {
+    @Override
+    public Response getOrderAuthorizations(String orderId) {
         return Response.ok(payments.findAuthorizationsByOrder(orderId)).build();
     }
 
-    @POST
-    @Produces(APPLICATION_JSON)
-    @Consumes(APPLICATION_JSON)
+    @Override
     public Authorization authorize(PaymentRequest paymentRequest) {
 
         String firstName = paymentRequest.getCustomer().getFirstName();

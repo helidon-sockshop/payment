@@ -5,26 +5,31 @@ import java.io.Serializable;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 /**
  * Credit card information.
  */
 @Data
 @NoArgsConstructor
+@Schema(description = "Credit card information")
 public class Card implements Serializable {
     /**
      * Credit card number.
      */
+    @Schema(description = "Credit card number")
     private String longNum;
 
     /**
      * Expiration date.
      */
+    @Schema(description = "Expiration date")
     private String expires;
 
     /**
      * CCV code.
      */
+    @Schema(description = "CCV code")
     private String ccv;
 
     @Builder
