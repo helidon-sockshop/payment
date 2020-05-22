@@ -1,23 +1,21 @@
 package io.helidon.examples.sockshop.payment;
 
+import io.helidon.microprofile.grpc.core.GrpcMarshaller;
+import io.helidon.microprofile.grpc.core.RpcService;
+import io.helidon.microprofile.grpc.core.Unary;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Response;
 
-import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import java.util.Collection;
 
 /**
- * Implementation of the Payment Service REST API.
+ * Implementation of the Payment Service gRPC API.
  */
 @ApplicationScoped
-@Path("/payments")
-public class PaymentResource implements PaymentApi {
+@RpcService
+@GrpcMarshaller("jsonb")
+public class PaymentGrpc {
     /**
      * Payment repository to use.
      */
@@ -30,12 +28,12 @@ public class PaymentResource implements PaymentApi {
     @Inject
     private PaymentService paymentService;
 
-    @Override
-    public Response getOrderAuthorizations(String orderId) {
-        return Response.ok(payments.findAuthorizationsByOrder(orderId)).build();
+    @Unary
+    public Collection<? extends Authorization> getOrderAuthorizations(String orderId) {
+        return payments.findAuthorizationsByOrder(orderId);
     }
 
-    @Override
+    @Unary
     public Authorization authorize(PaymentRequest paymentRequest) {
         String firstName = paymentRequest.getCustomer().getFirstName();
         String lastName  = paymentRequest.getCustomer().getLastName();
@@ -52,6 +50,4 @@ public class PaymentResource implements PaymentApi {
 
         return auth;
     }
-
-
 }
