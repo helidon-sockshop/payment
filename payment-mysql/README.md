@@ -30,7 +30,7 @@ $ docker run --rm --name payment-db --network sockshop \
       -e MYSQL_DATABASE=payments \
       -e MYSQL_USER=payment \
       -e MYSQL_PASSWORD=pass \
-      mysql:8.0.19
+      mysql:8.0.20
 ``` 
 > **Note:** The `--rm` flag above ensures that the container is removed automatically after it is 
 > stopped. This allows you to re-run the command above without having to remove the `payment-db`
