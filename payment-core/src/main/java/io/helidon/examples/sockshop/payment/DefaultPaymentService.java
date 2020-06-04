@@ -22,6 +22,8 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.eclipse.microprofile.metrics.Counter;
+import org.eclipse.microprofile.metrics.annotation.Metric;
 import org.eclipse.microprofile.opentracing.Traced;
 
 /**
@@ -38,6 +40,14 @@ public class DefaultPaymentService implements PaymentService {
      * Payment limit
      */
     private float paymentLimit;
+
+    @Inject
+    @Metric(name = "payment.success")
+    private Counter paymentSuccess;
+
+    @Inject
+    @Metric(name = "payment.failure")
+    private Counter paymentFailure;
 
     /**
      * Construct {@code DefaultPaymentService} instance.
@@ -62,6 +72,12 @@ public class DefaultPaymentService implements PaymentService {
         String message = fAuthorized ? "Payment authorized." :
                 amount <= 0 ? "Invalid payment amount." :
                         "Payment declined: amount exceeds " + String.format("%.2f", paymentLimit);
+
+        if (fAuthorized) {
+            paymentSuccess.inc();
+        } else {
+            paymentFailure.inc();
+        }
 
         return Authorization.builder()
                 .orderId(orderId)
