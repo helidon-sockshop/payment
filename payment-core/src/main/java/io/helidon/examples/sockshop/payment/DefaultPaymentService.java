@@ -55,6 +55,15 @@ public class DefaultPaymentService implements PaymentService {
     public DefaultPaymentService() {
     }
 
+     /**
+     * Construct {@code DefaultPaymentService} instance with {@link Counter}s for testing purposes.
+     */
+    public DefaultPaymentService(float paymentLimit, Counter paymentSuccess, Counter paymentFailure) {
+        this.paymentSuccess = paymentSuccess;
+        this.paymentFailure = paymentFailure;
+        this.paymentLimit = paymentLimit;
+    }
+
     /**
      * Construct {@code DefaultPaymentService} instance.
      *

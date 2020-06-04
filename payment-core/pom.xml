@@ -41,6 +41,7 @@
         <version.lib.lombok>1.18.10</version.lib.lombok>
         <version.lib.junit>5.6.2</version.lib.junit>
         <version.lib.hamcrest>2.2</version.lib.hamcrest>
+        <version.lib.mockito>2.23.4</version.lib.mockito>
         <version.lib.rest-assured>4.3.0</version.lib.rest-assured>
 
         <version.plugin.surefire>2.22.2</version.plugin.surefire>
@@ -113,6 +114,11 @@
             <groupId>io.helidon.microprofile.grpc</groupId>
             <artifactId>helidon-microprofile-grpc-client</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${version.lib.mockito}</version>
         </dependency>
     </dependencies>
 
