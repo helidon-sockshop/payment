@@ -38,7 +38,7 @@ public class DefaultPaymentServiceTest {
     private Counter paymentSuccess = mock(Counter.class);
     private Counter paymentFailure = mock(Counter.class);
     private PaymentService service;
-                                                                                                                                                                                CustomersResource.java
+
     @BeforeEach
     void initCounters() {
         service = new DefaultPaymentService(100, paymentSuccess, paymentFailure);
