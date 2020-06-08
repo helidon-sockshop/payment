@@ -16,9 +16,13 @@
 
 package io.helidon.examples.sockshop.payment.coherence;
 
+import com.oracle.coherence.cdi.Name;
+import com.tangosol.net.NamedMap;
+
 import io.helidon.examples.sockshop.payment.Authorization;
 import io.helidon.examples.sockshop.payment.AuthorizationId;
 import io.helidon.examples.sockshop.payment.DefaultPaymentRepository;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.Priority;
 import javax.enterprise.context.ApplicationScoped;
@@ -26,8 +30,6 @@ import javax.enterprise.inject.Alternative;
 
 import javax.inject.Inject;
 
-import com.oracle.coherence.cdi.Cache;
-import com.tangosol.net.NamedCache;
 import org.eclipse.microprofile.opentracing.Traced;
 
 import java.util.Collection;
@@ -44,10 +46,10 @@ import static javax.interceptor.Interceptor.Priority.APPLICATION;
 @Priority(APPLICATION)
 @Traced
 public class CoherencePaymentRepository extends DefaultPaymentRepository {
-    protected final NamedCache<AuthorizationId, Authorization> payments;
+    protected final NamedMap<AuthorizationId, Authorization> payments;
 
     @Inject
-    CoherencePaymentRepository(@Cache("payments") NamedCache<AuthorizationId, Authorization> payments) {
+    CoherencePaymentRepository(@Name("payments") NamedMap<AuthorizationId, Authorization> payments) {
         super(payments);
         this.payments = payments;
     }

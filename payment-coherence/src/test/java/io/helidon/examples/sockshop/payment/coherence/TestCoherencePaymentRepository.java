@@ -16,16 +16,17 @@
 
 package io.helidon.examples.sockshop.payment.coherence;
 
+import com.oracle.coherence.cdi.Name;
+import com.tangosol.net.NamedMap;
+
 import io.helidon.examples.sockshop.payment.Authorization;
 import io.helidon.examples.sockshop.payment.AuthorizationId;
+
 import javax.annotation.Priority;
 import javax.enterprise.inject.Alternative;
 import javax.inject.Inject;
 
 import io.helidon.examples.sockshop.payment.TestPaymentRepository;
-
-import com.oracle.coherence.cdi.Cache;
-import com.tangosol.net.NamedCache;
 
 import static javax.interceptor.Interceptor.Priority.APPLICATION;
 
@@ -33,7 +34,7 @@ import static javax.interceptor.Interceptor.Priority.APPLICATION;
 @Priority(APPLICATION + 5)
 public class TestCoherencePaymentRepository extends CoherencePaymentRepository implements TestPaymentRepository {
     @Inject
-    TestCoherencePaymentRepository(@Cache("payments") NamedCache<AuthorizationId, Authorization> payments) {
+    TestCoherencePaymentRepository(@Name("payments") NamedMap<AuthorizationId, Authorization> payments) {
         super(payments);
     }
 

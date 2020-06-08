@@ -23,6 +23,8 @@ import io.helidon.microprofile.grpc.core.Unary;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import org.eclipse.microprofile.metrics.annotation.Metered;
+
 import java.util.Collection;
 
 /**
@@ -50,6 +52,7 @@ public class PaymentGrpc {
     }
 
     @Unary
+        @Metered
     public Authorization authorize(PaymentRequest paymentRequest) {
         String firstName = paymentRequest.getCustomer().getFirstName();
         String lastName  = paymentRequest.getCustomer().getLastName();
