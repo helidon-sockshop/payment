@@ -16,7 +16,6 @@
 
 package io.helidon.examples.sockshop.payment.coherence;
 
-import com.tangosol.util.Filters;
 import io.helidon.examples.sockshop.payment.Authorization;
 import io.helidon.examples.sockshop.payment.AuthorizationId;
 import io.helidon.examples.sockshop.payment.DefaultPaymentRepository;
