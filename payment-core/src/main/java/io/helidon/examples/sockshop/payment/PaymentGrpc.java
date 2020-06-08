@@ -23,6 +23,8 @@ import io.helidon.microprofile.grpc.core.Unary;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import org.eclipse.microprofile.metrics.annotation.Metered;
+
 import java.util.Collection;
 
 /**
@@ -31,6 +33,7 @@ import java.util.Collection;
 @ApplicationScoped
 @RpcService
 @GrpcMarshaller("jsonb")
+@Metered
 public class PaymentGrpc {
     /**
      * Payment repository to use.
