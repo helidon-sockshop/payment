@@ -52,7 +52,7 @@ public class PaymentGrpc {
     }
 
     @Unary
-        @Metered
+    @Metered
     public Authorization authorize(PaymentRequest paymentRequest) {
         String firstName = paymentRequest.getCustomer().getFirstName();
         String lastName  = paymentRequest.getCustomer().getLastName();
