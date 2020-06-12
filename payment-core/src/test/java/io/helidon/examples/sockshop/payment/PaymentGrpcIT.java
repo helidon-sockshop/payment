@@ -10,7 +10,9 @@ package io.helidon.examples.sockshop.payment;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-import io.helidon.microprofile.grpc.client.GrpcClientProxyBuilder;
+import javax.enterprise.inject.spi.CDI;
+
+import io.helidon.microprofile.grpc.client.GrpcProxyBuilder;
 import io.helidon.microprofile.server.Server;
 
 import org.junit.jupiter.api.AfterAll;
@@ -42,7 +44,7 @@ public class PaymentGrpcIT {
         System.setProperty("tracing.global", "false");
         System.setProperty("grpc.port", "0");
         SERVER = Server.builder().port(0).build().start();
-        CLIENT = GrpcClientProxyBuilder.create(PaymentClient.class).build();
+        CLIENT = GrpcProxyBuilder.create(PaymentClient.class).build();
     }
 
     /**
@@ -57,7 +59,7 @@ public class PaymentGrpcIT {
 
     @BeforeEach
     void setup() {
-        payments = SERVER.cdiContainer().select(TestPaymentRepository.class).get();
+        payments = CDI.current().select(TestPaymentRepository.class).get();
         payments.clear();
     }
 

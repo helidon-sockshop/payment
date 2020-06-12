@@ -8,12 +8,12 @@
 package io.helidon.examples.sockshop.payment;
 
 import io.helidon.microprofile.grpc.core.GrpcMarshaller;
-import io.helidon.microprofile.grpc.core.RpcService;
+import io.helidon.microprofile.grpc.core.Grpc;
 import io.helidon.microprofile.grpc.core.Unary;
 
 import java.util.Collection;
 
-@RpcService(name = "PaymentGrpc")
+@Grpc(name = "PaymentGrpc")
 @GrpcMarshaller("jsonb")
 public interface PaymentClient {
     @Unary

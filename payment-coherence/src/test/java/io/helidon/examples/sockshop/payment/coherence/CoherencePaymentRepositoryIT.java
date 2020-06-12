@@ -7,6 +7,8 @@
 
 package io.helidon.examples.sockshop.payment.coherence;
 
+import javax.enterprise.inject.spi.CDI;
+
 import io.helidon.examples.sockshop.payment.PaymentRepositoryTest;
 import io.helidon.examples.sockshop.payment.TestPaymentRepository;
 import io.helidon.microprofile.server.Server;
@@ -41,6 +43,6 @@ class CoherencePaymentRepositoryIT extends PaymentRepositoryTest {
     }
 
     public TestPaymentRepository getPaymentRepository() {
-        return SERVER.cdiContainer().select(TestPaymentRepository.class).get();
+        return CDI.current().select(TestPaymentRepository.class).get();
     }
 }

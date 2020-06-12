@@ -10,6 +10,8 @@ package io.helidon.examples.sockshop.payment;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
+import javax.enterprise.inject.spi.CDI;
+
 import io.helidon.microprofile.server.Server;
 
 import io.restassured.RestAssured;
@@ -61,7 +63,7 @@ public class PaymentResourceIT {
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = SERVER.port();
 
-        payments = SERVER.cdiContainer().select(TestPaymentRepository.class).get();
+        payments = CDI.current().select(TestPaymentRepository.class).get();
         payments.clear();
     }
 
