@@ -7,13 +7,14 @@
 
 package io.helidon.examples.sockshop.payment.coherence;
 
+import com.tangosol.net.Coherence;
+
 import javax.enterprise.inject.spi.CDI;
 
 import io.helidon.examples.sockshop.payment.PaymentRepositoryTest;
 import io.helidon.examples.sockshop.payment.TestPaymentRepository;
 import io.helidon.microprofile.server.Server;
 
-import com.tangosol.net.CacheFactory;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 
@@ -40,6 +41,7 @@ class CoherencePaymentRepositoryIT extends PaymentRepositoryTest {
     @AfterAll
     static void stopServer() {
         SERVER.stop();
+        Coherence.closeAll();
     }
 
     public TestPaymentRepository getPaymentRepository() {
