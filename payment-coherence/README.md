@@ -20,7 +20,7 @@ and optionally **persistent** nodes.
 To run Coherence implementation of the service, simply execute
 
 ```bash
-$ docker run -p 7001:7001 helidon/sockshop/payment-coherence
+$ docker run -p 7001:7001 ghcr.io/helidon-sockshop/payment-coherence
 ``` 
 
 Once the container is up and running, you should be able to access [service API](../README.md#api) 
