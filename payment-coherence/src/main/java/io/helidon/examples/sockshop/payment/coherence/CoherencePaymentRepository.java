@@ -7,7 +7,7 @@
 
 package io.helidon.examples.sockshop.payment.coherence;
 
-import com.oracle.coherence.inject.Name;
+import com.oracle.coherence.cdi.Name;
 import com.tangosol.net.NamedMap;
 
 import io.helidon.examples.sockshop.payment.Authorization;
